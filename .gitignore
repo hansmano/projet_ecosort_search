@@ -1,0 +1,28 @@
+# --- Dataset (ne JAMAIS pousser : plusieurs Mo/Go) ---
+data/
+*.zip
+
+# --- Environnements virtuels Python ---
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# --- Jupyter / logs / caches ---
+.ipynb_checkpoints/
+*.log
+.streamlit/secrets.toml
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- IDE ---
+.vscode/
+.idea/
+.claude/
+
+# NB : le modèle entraîné models/modele_eco_sort.h5 EST versionné
+# (c'est un livrable, pas une donnée d'entraînement).
