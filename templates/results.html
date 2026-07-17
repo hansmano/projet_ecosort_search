@@ -5,8 +5,8 @@
 {% block content %}
 <section class="section-heading">
   <p class="eyebrow">Resultats Jumia</p>
-  <h1>Choisissez le produit a analyser</h1>
-  <p class="lead">Recherche : <strong>{{ query }}</strong></p>
+  <h1>Selectionnez l'article qui ressemble le plus a votre produit.</h1>
+  <p class="lead">Recherche analysee : <strong>{{ query }}</strong>. Chaque carte peut etre envoyee au modele de tri.</p>
 </section>
 
 {% if products %}
@@ -25,12 +25,15 @@
           {% if product.price %}
             <p class="price">{{ product.price }}</p>
           {% endif %}
+          {% if product.url %}
+            <a class="product-link" href="{{ product.url }}" target="_blank" rel="noreferrer">Consulter la fiche</a>
+          {% endif %}
           <form action="{{ url_for('predict_product') }}" method="post">
             <input type="hidden" name="title" value="{{ product.title }}">
             <input type="hidden" name="price" value="{{ product.price }}">
             <input type="hidden" name="image" value="{{ product.image }}">
             <input type="hidden" name="url" value="{{ product.url }}">
-            <button type="submit">Analyser</button>
+            <button type="submit">Classer ce produit</button>
           </form>
         </div>
       </article>
@@ -38,5 +41,5 @@
   </section>
 {% endif %}
 
-<a class="back-link" href="{{ url_for('index') }}">Nouvelle recherche</a>
+<a class="back-link" href="{{ url_for('index') }}">Lancer une autre recherche</a>
 {% endblock %}

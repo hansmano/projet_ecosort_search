@@ -7,7 +7,9 @@
 {% if verdict %}
   <style>
     body.verdict-page {
-      background: {{ verdict.bin_info.color }};
+      background:
+        linear-gradient(135deg, rgba(0, 0, 0, 0.18), rgba(255, 255, 255, 0.14)),
+        {{ verdict.bin_info.color }};
       color: {{ verdict.bin_info.text }};
     }
     body.verdict-page .topbar,
@@ -38,6 +40,9 @@
       <p class="eyebrow">Consigne de tri</p>
       <h2>{{ verdict.bin_info.label }}</h2>
       <p class="description">{{ verdict.bin_info.desc }}</p>
+      <div class="bin-badge" style="background: {{ verdict.bin_info.color }};">
+        <span>{{ verdict.bin }}</span>
+      </div>
       <dl>
         <div>
           <dt>Matiere detectee</dt>
@@ -49,6 +54,7 @@
         </div>
       </dl>
       <p class="reason">{{ verdict.reason }}</p>
+      <p class="sorting-tip">Consigne : deposez ce produit dans la categorie indiquee si l'emballage est vide et separe des restes alimentaires.</p>
     </article>
   {% else %}
     <article class="verdict-card error-card">
@@ -59,5 +65,5 @@
   {% endif %}
 </section>
 
-<a class="back-link" href="{{ url_for('index') }}">Retour a la recherche</a>
+<a class="back-link" href="{{ url_for('index') }}">Analyser un autre produit</a>
 {% endblock %}
