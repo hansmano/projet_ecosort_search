@@ -33,6 +33,46 @@ L'utilisateur recherche un produit, choisit un resultat Jumia, puis l'applicatio
   - Mode demo.
   - Dockerfile et Docker Compose.
 
+## Modele IA
+
+- Architecture actuelle : Transfer Learning avec MobileNetV2.
+- Base ImageNet gelee, puis tete de classification adaptee au tri.
+- Dataset : Garbage Classification / TrashNet.
+- Classes apprises : `cardboard`, `glass`, `metal`, `paper`, `plastic`, `trash`.
+- Fichiers attendus :
+  - `models/modele_eco_sort.h5`
+  - `models/labels.json`
+
+### Reentrainer le modele
+
+Placer le dataset dans :
+
+```text
+data/dataset/<classe>/*.jpg
+```
+
+Puis lancer :
+
+```bash
+pip install -r requirements.txt
+python src/train.py --data_dir data/dataset --epochs 12
+```
+
+Le dossier `data/` ne doit pas etre pousse sur GitHub.
+
+## Scraping Jumia
+
+Le module `src/scraper.py` interroge Jumia avec `requests` et `BeautifulSoup`.
+
+Il renvoie une liste de produits contenant :
+
+- `title`
+- `price`
+- `image`
+- `url`
+
+L'interface Flask utilise ces donnees pour afficher les cartes produits.
+
 ## Structure utile
 
 ```text
