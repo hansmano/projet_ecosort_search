@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Prediction - EcoSort-Search{% endblock %}
+{% block body_class %}{% if verdict %}verdict-page{% endif %}{% endblock %}
+
+{% block content %}
+{% if verdict %}
+  <style>
+    body.verdict-page {
+      background: {{ verdict.bin_info.color }};
+      color: {{ verdict.bin_info.text }};
+    }
+    body.verdict-page .topbar,
+    body.verdict-page .verdict-card,
+    body.verdict-page .selected-product {
+      color: {{ verdict.bin_info.text }};
+    }
+  </style>
+{% endif %}
+
+<section class="prediction-layout">
+  <article class="selected-product">
+    <p class="eyebrow">Produit selectionne</p>
+    {% if product.image %}
+      <img src="{{ product.image }}" alt="{{ product.title }}">
+    {% endif %}
+    <h1>{{ product.title }}</h1>
+    {% if product.price %}
+      <p class="price">{{ product.price }}</p>
+    {% endif %}
+    {% if product.url %}
+      <a href="{{ product.url }}" target="_blank" rel="noreferrer">Voir sur Jumia</a>
+    {% endif %}
+  </article>
+
+  {% if verdict %}
+    <article class="verdict-card">
+      <p class="eyebrow">Consigne de tri</p>
+      <h2>{{ verdict.bin_info.label }}</h2>
+      <p class="description">{{ verdict.bin_info.desc }}</p>
+      <dl>
+        <div>
+          <dt>Matiere detectee</dt>
+          <dd>{{ verdict.material }}</dd>
+        </div>
+        <div>
+          <dt>Confiance</dt>
+          <dd>{{ "%.0f"|format(verdict.confidence * 100) }}%</dd>
+        </div>
+      </dl>
+      <p class="reason">{{ verdict.reason }}</p>
+    </article>
+  {% else %}
+    <article class="verdict-card error-card">
+      <p class="eyebrow">Analyse impossible</p>
+      <h2>Image indisponible</h2>
+      <p>La prediction IA a besoin de l'image du produit pour classer la matiere.</p>
+    </article>
+  {% endif %}
+</section>
+
+<a class="back-link" href="{{ url_for('index') }}">Retour a la recherche</a>
+{% endblock %}

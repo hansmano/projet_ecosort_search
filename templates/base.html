@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}EcoSort-Search{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body class="{% block body_class %}{% endblock %}">
+    <header class="topbar">
+      <a class="brand" href="{{ url_for('index') }}">
+        <span class="brand-mark">Eco</span>
+        <span>EcoSort-Search</span>
+      </a>
+      <span class="branch-label">Flask - Docker - IA</span>
+    </header>
+
+    <main class="page">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <section class="alerts">
+            {% for message in messages %}
+              <p>{{ message }}</p>
+            {% endfor %}
+          </section>
+        {% endif %}
+      {% endwith %}
+
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Recherche produit - EcoSort-Search{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-content">
+    <p class="eyebrow">Tri selectif assiste par IA</p>
+    <h1>Trouvez la bonne poubelle pour un produit Jumia.</h1>
+    <p class="lead">
+      Saisissez un produit, choisissez un resultat, puis laissez le modele proposer
+      la consigne de tri adaptee.
+    </p>
+
+    <form class="search-form" action="{{ url_for('search') }}" method="post">
+      <label for="query">Nom du produit</label>
+      <div class="search-row">
+        <input
+          id="query"
+          name="query"
+          type="search"
+          placeholder="ex : bouteille eau, chargeur, cahier"
+          autocomplete="off"
+          required
+        >
+        <button type="submit">Rechercher</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="workflow">
+  <article>
+    <strong>1</strong>
+    <span>Recherche sur Jumia</span>
+  </article>
+  <article>
+    <strong>2</strong>
+    <span>Selection du produit</span>
+  </article>
+  <article>
+    <strong>3</strong>
+    <span>Prediction de la poubelle</span>
+  </article>
+</section>
+{% endblock %}
