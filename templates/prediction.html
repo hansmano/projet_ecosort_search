@@ -22,7 +22,7 @@
 
 <section class="prediction-layout">
   <article class="selected-product">
-    <p class="eyebrow">Produit selectionne</p>
+    <p class="eyebrow">Produit sélectionné</p>
     {% if product.image %}
       <img src="{{ product.image }}" alt="{{ product.title }}">
     {% endif %}
@@ -45,7 +45,7 @@
       </div>
       <dl>
         <div>
-          <dt>Matiere detectee</dt>
+          <dt>Matière détectée</dt>
           <dd>{{ verdict.material }}</dd>
         </div>
         <div>
@@ -54,13 +54,13 @@
         </div>
       </dl>
       <p class="reason">{{ verdict.reason }}</p>
-      <p class="sorting-tip">Consigne : deposez ce produit dans la categorie indiquee si l'emballage est vide et separe des restes alimentaires.</p>
+      <p class="sorting-tip">Consigne : déposez ce produit dans la catégorie indiquée si l'emballage est vide et séparé des restes alimentaires.</p>
     </article>
   {% else %}
     <article class="verdict-card error-card">
       <p class="eyebrow">Analyse impossible</p>
       <h2>Image indisponible</h2>
-      <p>La prediction IA a besoin de l'image du produit pour classer la matiere.</p>
+      <p>La prédiction IA a besoin de l'image du produit pour classer la matière.</p>
     </article>
   {% endif %}
 </section>

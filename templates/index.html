@@ -4,12 +4,15 @@
 
 {% block content %}
 <section class="hero">
+  <div class="hero-bg bg-one" aria-hidden="true"></div>
+  <div class="hero-bg bg-two" aria-hidden="true"></div>
+  <div class="hero-bg bg-three" aria-hidden="true"></div>
   <div class="hero-content">
-    <p class="eyebrow">Tri selectif assiste par intelligence artificielle</p>
-    <h1>Un produit cherche, une consigne de tri claire.</h1>
+    <p class="eyebrow">Tri sélectif assisté par intelligence artificielle</p>
+    <h1>Un produit recherché, une consigne de tri claire.</h1>
     <p class="lead">
-      EcoSort-Search interroge Jumia, affiche les produits trouves, puis classe
-      l'article choisi dans la poubelle adaptee : jaune, verte, bleue, grise ou marron.
+      EcoSort-Search interroge Jumia, affiche les produits trouvés, puis classe
+      l'article choisi dans la poubelle adaptée : jaune, verte, bleue, grise ou marron.
     </p>
 
     <form class="search-form" action="{{ url_for('search') }}" method="post">
@@ -31,8 +34,19 @@
       <span class="tag yellow">Emballages</span>
       <span class="tag green">Verre</span>
       <span class="tag blue">Papier</span>
-      <span class="tag gray">Electronique</span>
-      <span class="tag brown">Residuel</span>
+      <span class="tag gray">Électronique</span>
+      <span class="tag brown">Résiduel</span>
+    </div>
+  </div>
+
+  <div class="ticker" aria-label="Message de sensibilisation">
+    <div class="ticker-track">
+      <span>Chaque produit bien trié rapproche la ville d'un environnement plus propre.</span>
+      <span>EcoSort-Search relie recherche produit, image et consigne de tri.</span>
+      <span>Jaune, vert, bleu, gris ou marron : l'IA vous aide à choisir.</span>
+      <span>Un geste simple, une poubelle adaptée, moins de déchets mal orientés.</span>
+      <span>Chaque produit bien trié rapproche la ville d'un environnement plus propre.</span>
+      <span>EcoSort-Search relie recherche produit, image et consigne de tri.</span>
     </div>
   </div>
 </section>
@@ -40,7 +54,7 @@
 <section class="bin-strip" aria-label="Categories officielles">
   <article class="bin-card yellow">
     <strong>Jaune</strong>
-    <span>Plastique, metal, carton</span>
+    <span>Plastique, métal, carton</span>
   </article>
   <article class="bin-card green">
     <strong>Verte</strong>
@@ -52,11 +66,11 @@
   </article>
   <article class="bin-card gray">
     <strong>D3E</strong>
-    <span>Produits a pile, batterie ou prise</span>
+    <span>Produits à pile, batterie ou prise</span>
   </article>
   <article class="bin-card brown">
-    <strong>Residuel</strong>
-    <span>Dechets non recyclables</span>
+    <strong>Résiduel</strong>
+    <span>Déchets non recyclables</span>
   </article>
 </section>
 
@@ -72,14 +86,14 @@
     <strong>02</strong>
     <div>
       <h2>Choisir</h2>
-      <p>L'utilisateur selectionne le produit qui correspond le mieux.</p>
+      <p>L'utilisateur sélectionne le produit qui correspond le mieux.</p>
     </div>
   </article>
   <article>
     <strong>03</strong>
     <div>
       <h2>Trier</h2>
-      <p>Le modele IA et les regles D3E donnent la consigne finale.</p>
+      <p>Le modèle IA et les règles D3E donnent la consigne finale.</p>
     </div>
   </article>
 </section>

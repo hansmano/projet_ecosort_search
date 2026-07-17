@@ -123,10 +123,61 @@ a {
   padding: clamp(2rem, 6vw, 5rem);
   overflow: hidden;
   border-radius: 8px;
-  background:
-    linear-gradient(90deg, rgba(248, 250, 247, 0.96) 0%, rgba(248, 250, 247, 0.88) 34%, rgba(248, 250, 247, 0.28) 58%, rgba(248, 250, 247, 0.02) 100%),
-    url("../images/ecosort-hero.png") center / cover no-repeat;
+  background: #f4f8f3;
   box-shadow: var(--shadow);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(90deg, rgba(248, 250, 247, 0.98) 0%, rgba(248, 250, 247, 0.9) 33%, rgba(248, 250, 247, 0.34) 59%, rgba(248, 250, 247, 0.04) 100%),
+    linear-gradient(180deg, transparent 72%, rgba(15, 47, 36, 0.22) 100%);
+  pointer-events: none;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-position: center;
+  background-size: cover;
+  opacity: 0;
+  transform: scale(1.02);
+  animation: heroFade 24s infinite;
+}
+
+.hero-bg.bg-one {
+  background-image: url("../images/ecosort-hero.png");
+}
+
+.hero-bg.bg-two {
+  background-image: url("../images/ecosort-hero-ai.png");
+  animation-delay: 8s;
+}
+
+.hero-bg.bg-three {
+  background-image: url("../images/ecosort-hero-civic.png");
+  animation-delay: 16s;
+}
+
+@keyframes heroFade {
+  0%,
+  8% {
+    opacity: 0;
+  }
+
+  14%,
+  34% {
+    opacity: 1;
+  }
+
+  42%,
+  100% {
+    opacity: 0;
+  }
 }
 
 .hero-content,
@@ -158,8 +209,8 @@ span {
 
 h1 {
   margin: 0;
-  font-size: clamp(2.35rem, 5vw, 5rem);
-  line-height: 1.02;
+  font-size: clamp(3rem, 7vw, 6.9rem);
+  line-height: 0.94;
 }
 
 .lead {
@@ -232,6 +283,43 @@ button:hover {
 
 .hero-tags {
   margin-top: 1.2rem;
+}
+
+.ticker {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.36);
+  background: rgba(15, 47, 36, 0.82);
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  gap: 2.5rem;
+  padding: 0.72rem 1rem;
+  animation: tickerScroll 30s linear infinite;
+}
+
+.ticker-track span {
+  white-space: nowrap;
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
+@keyframes tickerScroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .tag {
@@ -547,9 +635,13 @@ dd {
 
   .hero {
     min-height: auto;
+    padding-bottom: 4rem;
+  }
+
+  .hero::after {
     background:
-      linear-gradient(180deg, rgba(248, 250, 247, 0.98) 0%, rgba(248, 250, 247, 0.9) 58%, rgba(248, 250, 247, 0.28) 100%),
-      url("../images/ecosort-hero.png") center / cover no-repeat;
+      linear-gradient(180deg, rgba(248, 250, 247, 0.98) 0%, rgba(248, 250, 247, 0.9) 52%, rgba(248, 250, 247, 0.36) 100%),
+      linear-gradient(180deg, transparent 68%, rgba(15, 47, 36, 0.24) 100%);
   }
 
   .workflow {
@@ -579,6 +671,16 @@ dd {
 
   .hero {
     padding: 1.25rem;
+    padding-bottom: 4rem;
+  }
+
+  h1 {
+    font-size: clamp(2.55rem, 14vw, 4.4rem);
+  }
+
+  .ticker-track {
+    gap: 1.5rem;
+    animation-duration: 24s;
   }
 
   .search-form {
