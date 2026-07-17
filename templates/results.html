@@ -20,7 +20,7 @@
   <section class="fallback-panel">
     <h2>Jumia est momentanément indisponible</h2>
     <p>Le parcours peut tout de même être testé avec des produits de démonstration.</p>
-    <a class="button-link" href="{{ url_for('demo') }}">Ouvrir le mode démo</a>
+    <a class="button-link" href="{{ url_for('demo') }}"><svg class="icon"><use href="#icon-play"></use></svg>Ouvrir le mode démo</a>
   </section>
 {% endif %}
 
@@ -53,7 +53,7 @@
               <input type="hidden" name="demo_material" value="{{ product.demo_material }}">
               <input type="hidden" name="demo_reason" value="{{ product.demo_reason }}">
             {% endif %}
-            <button type="submit">Classer ce produit</button>
+            <button type="submit"><svg class="icon"><use href="#icon-check"></use></svg>Classer ce produit</button>
           </form>
         </div>
       </article>
@@ -63,12 +63,12 @@
   <section class="empty-state">
     <h2>Aucun résultat exploitable</h2>
     <p>Essayez une recherche plus simple, par exemple “bouteille”, “chargeur” ou “cahier”.</p>
-    <a class="button-link secondary" href="{{ url_for('demo') }}">Tester avec le mode démo</a>
+    <a class="button-link secondary" href="{{ url_for('demo') }}"><svg class="icon"><use href="#icon-play"></use></svg>Tester avec le mode démo</a>
   </section>
 {% endif %}
 
 <div class="action-row">
-  <a class="button-link" href="{{ url_for('index') }}">Nouvelle recherche</a>
-  <a class="button-link secondary" href="{{ url_for('about') }}">À propos des bacs</a>
+  <a class="button-link" href="{{ url_for('index') }}"><svg class="icon"><use href="#icon-refresh"></use></svg>Nouvelle recherche</a>
+  <a class="button-link secondary" href="{{ url_for('about') }}"><svg class="icon"><use href="#icon-info"></use></svg>À propos des bacs</a>
 </div>
 {% endblock %}

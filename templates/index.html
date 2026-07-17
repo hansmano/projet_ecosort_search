@@ -9,7 +9,7 @@
   <div class="hero-bg bg-three" aria-hidden="true"></div>
   <div class="hero-content">
     <p class="eyebrow">Tri sélectif assisté par intelligence artificielle</p>
-    <h1 class="hero-title">EcoSort Search</h1>
+    <h1 class="hero-title">EcoSort <span>Search</span></h1>
     <p class="hero-subtitle">Un produit recherché, une consigne de tri claire.</p>
     <p class="lead">
       EcoSort-Search interroge Jumia, affiche les produits trouvés, puis classe
@@ -27,13 +27,13 @@
           autocomplete="off"
           required
         >
-        <button type="submit">Rechercher</button>
+        <button type="submit"><svg class="icon"><use href="#icon-search"></use></svg>Rechercher</button>
       </div>
     </form>
 
     <div class="hero-actions">
-      <a class="button-link secondary" href="{{ url_for('demo') }}">Essayer le mode démo</a>
-      <a class="text-link" href="{{ url_for('about') }}">Comprendre les 5 bacs</a>
+      <a class="button-link secondary" href="{{ url_for('demo') }}"><svg class="icon"><use href="#icon-play"></use></svg>Essayer le mode démo</a>
+      <a class="text-link" href="{{ url_for('about') }}"><svg class="icon"><use href="#icon-info"></use></svg>Comprendre les 5 bacs</a>
     </div>
 
     <div class="hero-tags" aria-label="Categories de tri disponibles">
@@ -102,21 +102,21 @@
 
 <section class="workflow">
   <article>
-    <strong>01</strong>
+    <strong><svg class="icon"><use href="#icon-search"></use></svg></strong>
     <div>
       <h2>Rechercher</h2>
       <p>Le nom du produit lance une recherche Jumia en direct.</p>
     </div>
   </article>
   <article>
-    <strong>02</strong>
+    <strong><svg class="icon"><use href="#icon-box"></use></svg></strong>
     <div>
       <h2>Choisir</h2>
       <p>L'utilisateur sélectionne le produit qui correspond le mieux.</p>
     </div>
   </article>
   <article>
-    <strong>03</strong>
+    <strong><svg class="icon"><use href="#icon-check"></use></svg></strong>
     <div>
       <h2>Trier</h2>
       <p>Le modèle IA et les règles D3E donnent la consigne finale.</p>

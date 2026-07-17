@@ -14,17 +14,17 @@
 
 <section class="about-grid">
   <article>
-    <strong>1</strong>
+    <strong><svg class="icon"><use href="#icon-search"></use></svg></strong>
     <h2>Recherche</h2>
     <p>L'utilisateur saisit un produit courant et l'application récupère plusieurs résultats pertinents.</p>
   </article>
   <article>
-    <strong>2</strong>
+    <strong><svg class="icon"><use href="#icon-box"></use></svg></strong>
     <h2>Analyse</h2>
     <p>L'image et le titre du produit sont utilisés pour prédire la matière ou détecter un D3E.</p>
   </article>
   <article>
-    <strong>3</strong>
+    <strong><svg class="icon"><use href="#icon-check"></use></svg></strong>
     <h2>Consigne</h2>
     <p>Le résultat est affiché avec la couleur de la poubelle correspondante.</p>
   </article>
@@ -48,7 +48,7 @@
 </section>
 
 <div class="action-row">
-  <a class="button-link" href="{{ url_for('index') }}">Nouvelle recherche</a>
-  <a class="button-link secondary" href="{{ url_for('demo') }}">Voir le mode démo</a>
+  <a class="button-link" href="{{ url_for('index') }}"><svg class="icon"><use href="#icon-refresh"></use></svg>Nouvelle recherche</a>
+  <a class="button-link secondary" href="{{ url_for('demo') }}"><svg class="icon"><use href="#icon-play"></use></svg>Voir le mode démo</a>
 </div>
 {% endblock %}

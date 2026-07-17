@@ -33,6 +33,24 @@ a {
   color: inherit;
 }
 
+.icon-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.icon {
+  width: 1.05em;
+  height: 1.05em;
+  flex: 0 0 auto;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
 .topbar {
   position: sticky;
   top: 0;
@@ -93,8 +111,15 @@ a {
 }
 
 .topnav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   color: var(--green-dark);
   text-decoration: none;
+}
+
+.topnav span {
+  padding-left: 0.2rem;
 }
 
 .page {
@@ -215,8 +240,16 @@ h1 {
 }
 
 .hero-title {
-  font-size: clamp(3.8rem, 8vw, 7.6rem);
+  display: grid;
+  gap: 0.08em;
+  font-size: clamp(3.9rem, 8vw, 7.7rem);
   line-height: 0.9;
+}
+
+.hero-title span {
+  color: var(--green-dark);
+  font-size: 0.44em;
+  line-height: 1;
 }
 
 .hero-subtitle {
@@ -273,6 +306,10 @@ input {
 }
 
 button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
   border: 0;
   padding: 0 1.25rem;
   background: var(--green);
@@ -294,6 +331,7 @@ button:hover {
   min-height: 2.9rem;
   align-items: center;
   justify-content: center;
+  gap: 0.45rem;
   border-radius: 8px;
   padding: 0 1rem;
   background: var(--green);
@@ -311,6 +349,9 @@ button:hover {
 }
 
 .text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   color: var(--green-dark);
   font-weight: 900;
   text-decoration: none;
@@ -563,6 +604,12 @@ button:hover {
   border-radius: 50%;
   background: #e8f4ee;
   color: var(--green);
+}
+
+.about-grid strong .icon,
+.workflow strong .icon {
+  width: 1.05rem;
+  height: 1.05rem;
 }
 
 .about-grid h2,
