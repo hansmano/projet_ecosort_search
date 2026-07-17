@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Resultats - EcoSort-Search{% endblock %}
+
+{% block content %}
+<section class="section-heading">
+  <p class="eyebrow">Resultats Jumia</p>
+  <h1>Selectionnez l'article qui ressemble le plus a votre produit.</h1>
+  <p class="lead">Recherche analysee : <strong>{{ query }}</strong>. Chaque carte peut etre envoyee au modele de tri.</p>
+</section>
+
+{% if products %}
+  <section class="product-grid">
+    {% for product in products %}
+      <article class="product-card">
+        <div class="product-image">
+          {% if product.image %}
+            <img src="{{ product.image }}" alt="{{ product.title }}">
+          {% else %}
+            <span>Image indisponible</span>
+          {% endif %}
+        </div>
+        <div class="product-body">
+          <h2>{{ product.title }}</h2>
+          {% if product.price %}
+            <p class="price">{{ product.price }}</p>
+          {% endif %}
+          {% if product.url %}
+            <a class="product-link" href="{{ product.url }}" target="_blank" rel="noreferrer">Consulter la fiche</a>
+          {% endif %}
+          <form action="{{ url_for('predict_product') }}" method="post">
+            <input type="hidden" name="title" value="{{ product.title }}">
+            <input type="hidden" name="price" value="{{ product.price }}">
+            <input type="hidden" name="image" value="{{ product.image }}">
+            <input type="hidden" name="url" value="{{ product.url }}">
+            <button type="submit">Classer ce produit</button>
+          </form>
+        </div>
+      </article>
+    {% endfor %}
+  </section>
+{% endif %}
+
+<a class="back-link" href="{{ url_for('index') }}">Lancer une autre recherche</a>
+{% endblock %}

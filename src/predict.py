@@ -14,7 +14,10 @@ import os
 import numpy as np
 from PIL import Image
 
-import config
+try:
+    from . import config
+except ImportError:  # Permet aussi l'execution directe hors package.
+    import config
 
 _model = None
 _labels = None
