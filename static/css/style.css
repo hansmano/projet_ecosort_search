@@ -209,8 +209,22 @@ span {
 
 h1 {
   margin: 0;
-  font-size: clamp(3rem, 7vw, 6.9rem);
+  font-size: clamp(2.4rem, 5vw, 4.4rem);
   line-height: 0.94;
+}
+
+.hero-title {
+  font-size: clamp(3.8rem, 8vw, 7.6rem);
+  line-height: 0.9;
+}
+
+.hero-subtitle {
+  max-width: 520px;
+  margin: 0.8rem 0 0;
+  color: var(--green-dark);
+  font-size: clamp(1.05rem, 1.8vw, 1.45rem);
+  font-weight: 900;
+  line-height: 1.25;
 }
 
 .lead {
@@ -675,7 +689,15 @@ dd {
   }
 
   h1 {
-    font-size: clamp(2.55rem, 14vw, 4.4rem);
+    font-size: clamp(2.3rem, 10vw, 3.6rem);
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 17vw, 5.2rem);
+  }
+
+  .hero-subtitle {
+    font-size: 1.02rem;
   }
 
   .ticker-track {
