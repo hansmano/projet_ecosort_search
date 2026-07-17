@@ -85,7 +85,8 @@ a {
 .topnav {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
   color: var(--muted);
   font-size: 0.9rem;
   font-weight: 800;
@@ -288,6 +289,49 @@ button:hover {
   box-shadow: 0 18px 34px rgba(31, 122, 77, 0.28);
 }
 
+.button-link {
+  display: inline-flex;
+  min-height: 2.9rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 0 1rem;
+  background: var(--green);
+  color: white;
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 0 14px 26px rgba(31, 122, 77, 0.2);
+}
+
+.button-link.secondary {
+  border: 1px solid rgba(31, 122, 77, 0.24);
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--green-dark);
+  box-shadow: none;
+}
+
+.text-link {
+  color: var(--green-dark);
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.hero-actions,
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.hero-actions {
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.action-row {
+  margin-top: 1.5rem;
+}
+
 .hero-tags,
 .bin-strip {
   display: flex;
@@ -381,6 +425,71 @@ button:hover {
   margin: 1rem 0 2rem;
 }
 
+.recent-panel,
+.fallback-panel,
+.empty-state {
+  margin-top: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 12px 34px rgba(18, 42, 31, 0.08);
+}
+
+.recent-panel {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.55fr) minmax(260px, 1fr);
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.panel-heading h2,
+.fallback-panel h2,
+.empty-state h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.recent-list {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.recent-list article {
+  display: grid;
+  grid-template-columns: minmax(90px, auto) 1fr auto;
+  gap: 0.65rem;
+  align-items: center;
+  padding: 0.75rem;
+  border: 1px solid rgba(31, 122, 77, 0.14);
+  border-radius: 8px;
+  background: var(--bg-soft);
+}
+
+.recent-list strong {
+  color: var(--green-dark);
+}
+
+.recent-list span {
+  color: var(--muted);
+}
+
+.recent-list em {
+  color: var(--text);
+  font-size: 0.82rem;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.fallback-panel,
+.empty-state {
+  padding: 1.25rem;
+}
+
+.fallback-panel p,
+.empty-state p {
+  color: var(--muted);
+}
+
 .bin-card {
   flex: 1 1 190px;
   min-height: 92px;
@@ -413,6 +522,79 @@ button:hover {
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   margin-top: 1rem;
+}
+
+.about-heading h1 {
+  max-width: 960px;
+}
+
+.compact-heading {
+  padding-top: 2.5rem;
+}
+
+.compact-heading h1 {
+  font-size: clamp(1.8rem, 3vw, 3rem);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.about-grid article,
+.about-bin {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 12px 34px rgba(18, 42, 31, 0.08);
+}
+
+.about-grid article {
+  padding: 1.15rem;
+}
+
+.about-grid strong {
+  display: grid;
+  width: 2.35rem;
+  height: 2.35rem;
+  place-items: center;
+  border-radius: 50%;
+  background: #e8f4ee;
+  color: var(--green);
+}
+
+.about-grid h2,
+.about-bin h2 {
+  margin: 0.8rem 0 0.35rem;
+}
+
+.about-grid p,
+.about-bin p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.about-bins {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.about-bin {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.9rem;
+  padding: 1rem;
+}
+
+.about-bin-color {
+  width: 1.1rem;
+  min-height: 100%;
+  border-radius: 999px;
 }
 
 .workflow article,
@@ -647,6 +829,11 @@ dd {
     grid-template-columns: 1fr;
   }
 
+  .recent-panel,
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
   .hero {
     min-height: auto;
     padding-bottom: 4rem;
@@ -675,7 +862,7 @@ dd {
   }
 
   .topnav {
-    justify-content: space-between;
+    justify-content: flex-start;
   }
 
   .page {
@@ -711,6 +898,14 @@ dd {
 
   button {
     width: 100%;
+  }
+
+  .button-link {
+    width: 100%;
+  }
+
+  .recent-list article {
+    grid-template-columns: 1fr;
   }
 
   .product-grid {

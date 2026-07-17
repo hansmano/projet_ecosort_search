@@ -31,6 +31,11 @@
       </div>
     </form>
 
+    <div class="hero-actions">
+      <a class="button-link secondary" href="{{ url_for('demo') }}">Essayer le mode démo</a>
+      <a class="text-link" href="{{ url_for('about') }}">Comprendre les 5 bacs</a>
+    </div>
+
     <div class="hero-tags" aria-label="Categories de tri disponibles">
       <span class="tag yellow">Emballages</span>
       <span class="tag green">Verre</span>
@@ -51,6 +56,26 @@
     </div>
   </div>
 </section>
+
+{% if recent_history %}
+  <section class="recent-panel" aria-label="Historique récent">
+    <div class="panel-heading">
+      <p class="eyebrow">Historique récent</p>
+      <h2>Vos dernières actions sur ce navigateur</h2>
+    </div>
+    <div class="recent-list">
+      {% for item in recent_history %}
+        <article>
+          <strong>{{ item.label }}</strong>
+          <span>{{ item.detail }}</span>
+          {% if item.bin_label %}
+            <em>{{ item.bin_label }}</em>
+          {% endif %}
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}
 
 <section class="bin-strip" aria-label="Categories officielles">
   <article class="bin-card yellow">

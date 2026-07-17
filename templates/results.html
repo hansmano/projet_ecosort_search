@@ -4,10 +4,25 @@
 
 {% block content %}
 <section class="section-heading">
-  <p class="eyebrow">Résultats Jumia</p>
+  <p class="eyebrow">{% if is_demo %}Mode démo{% else %}Résultats Jumia{% endif %}</p>
   <h1>Sélectionnez l'article qui ressemble le plus à votre produit.</h1>
-  <p class="lead">Recherche analysée : <strong>{{ query }}</strong>. Chaque carte peut être envoyée au modèle de tri.</p>
+  <p class="lead">
+    Recherche analysée : <strong>{{ query }}</strong>.
+    {% if is_demo %}
+      Ces produits préremplis permettent de présenter le parcours même sans connexion à Jumia.
+    {% else %}
+      Chaque carte peut être envoyée au modèle de tri.
+    {% endif %}
+  </p>
 </section>
+
+{% if fallback_available %}
+  <section class="fallback-panel">
+    <h2>Jumia est momentanément indisponible</h2>
+    <p>Le parcours peut tout de même être testé avec des produits de démonstration.</p>
+    <a class="button-link" href="{{ url_for('demo') }}">Ouvrir le mode démo</a>
+  </section>
+{% endif %}
 
 {% if products %}
   <section class="product-grid">
@@ -33,13 +48,27 @@
             <input type="hidden" name="price" value="{{ product.price }}">
             <input type="hidden" name="image" value="{{ product.image }}">
             <input type="hidden" name="url" value="{{ product.url }}">
+            {% if product.demo_bin %}
+              <input type="hidden" name="demo_bin" value="{{ product.demo_bin }}">
+              <input type="hidden" name="demo_material" value="{{ product.demo_material }}">
+              <input type="hidden" name="demo_reason" value="{{ product.demo_reason }}">
+            {% endif %}
             <button type="submit">Classer ce produit</button>
           </form>
         </div>
       </article>
     {% endfor %}
   </section>
+{% elif not fallback_available %}
+  <section class="empty-state">
+    <h2>Aucun résultat exploitable</h2>
+    <p>Essayez une recherche plus simple, par exemple “bouteille”, “chargeur” ou “cahier”.</p>
+    <a class="button-link secondary" href="{{ url_for('demo') }}">Tester avec le mode démo</a>
+  </section>
 {% endif %}
 
-<a class="back-link" href="{{ url_for('index') }}">Lancer une autre recherche</a>
+<div class="action-row">
+  <a class="button-link" href="{{ url_for('index') }}">Nouvelle recherche</a>
+  <a class="button-link secondary" href="{{ url_for('about') }}">À propos des bacs</a>
+</div>
 {% endblock %}

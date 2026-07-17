@@ -65,5 +65,9 @@
   {% endif %}
 </section>
 
-<a class="back-link" href="{{ url_for('index') }}">Analyser un autre produit</a>
+<div class="action-row">
+  <a class="button-link" href="{{ url_for('index') }}">Nouvelle recherche</a>
+  <a class="button-link secondary" href="{{ url_for('demo') }}">Mode démo</a>
+  <a class="button-link secondary" href="{{ url_for('about') }}">À propos</a>
+</div>
 {% endblock %}
