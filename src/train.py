@@ -107,8 +107,8 @@ def main():
     with open("models/labels.json", "w", encoding="utf-8") as f:
         json.dump(class_names, f, ensure_ascii=False, indent=2)
 
-    print(f"\n✅ Modèle sauvegardé : {args.out}")
-    print(f"✅ Ordre des classes : models/labels.json")
+    print(f"\nModele sauvegarde : {args.out}")
+    print("Ordre des classes : models/labels.json")
 
 
 if __name__ == "__main__":
