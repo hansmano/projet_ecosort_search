@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Recherche produit - EcoSort-Search{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-content">
+    <p class="eyebrow">Tri selectif assiste par intelligence artificielle</p>
+    <h1>Un produit cherche, une consigne de tri claire.</h1>
+    <p class="lead">
+      EcoSort-Search interroge Jumia, affiche les produits trouves, puis classe
+      l'article choisi dans la poubelle adaptee : jaune, verte, bleue, grise ou marron.
+    </p>
+
+    <form class="search-form" action="{{ url_for('search') }}" method="post">
+      <label for="query">Nom du produit</label>
+      <div class="search-row">
+        <input
+          id="query"
+          name="query"
+          type="search"
+          placeholder="ex : bouteille eau, chargeur, cahier"
+          autocomplete="off"
+          required
+        >
+        <button type="submit">Rechercher</button>
+      </div>
+    </form>
+
+    <div class="hero-tags" aria-label="Categories de tri disponibles">
+      <span class="tag yellow">Emballages</span>
+      <span class="tag green">Verre</span>
+      <span class="tag blue">Papier</span>
+      <span class="tag gray">Electronique</span>
+      <span class="tag brown">Residuel</span>
+    </div>
+  </div>
+
+  <aside class="hero-visual" aria-label="Illustration EcoSort-Search">
+    <img src="{{ url_for('static', filename='images/ecosort-hero.png') }}" alt="Bacs de tri et produits recyclables">
+  </aside>
+</section>
+
+<section class="bin-strip" aria-label="Categories officielles">
+  <article class="bin-card yellow">
+    <strong>Jaune</strong>
+    <span>Plastique, metal, carton</span>
+  </article>
+  <article class="bin-card green">
+    <strong>Verte</strong>
+    <span>Bouteilles, pots et bocaux en verre</span>
+  </article>
+  <article class="bin-card blue">
+    <strong>Bleue</strong>
+    <span>Papiers, journaux, cahiers</span>
+  </article>
+  <article class="bin-card gray">
+    <strong>D3E</strong>
+    <span>Produits a pile, batterie ou prise</span>
+  </article>
+  <article class="bin-card brown">
+    <strong>Residuel</strong>
+    <span>Dechets non recyclables</span>
+  </article>
+</section>
+
+<section class="workflow">
+  <article>
+    <strong>01</strong>
+    <div>
+      <h2>Rechercher</h2>
+      <p>Le nom du produit lance une recherche Jumia en direct.</p>
+    </div>
+  </article>
+  <article>
+    <strong>02</strong>
+    <div>
+      <h2>Choisir</h2>
+      <p>L'utilisateur selectionne le produit qui correspond le mieux.</p>
+    </div>
+  </article>
+  <article>
+    <strong>03</strong>
+    <div>
+      <h2>Trier</h2>
+      <p>Le modele IA et les regles D3E donnent la consigne finale.</p>
+    </div>
+  </article>
+</section>
+{% endblock %}

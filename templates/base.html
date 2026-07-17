@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}EcoSort-Search{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body class="{% block body_class %}{% endblock %}">
+    <header class="topbar">
+      <a class="brand" href="{{ url_for('index') }}">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>
+          EcoSort-Search
+          <small>Assistant de tri intelligent</small>
+        </span>
+      </a>
+      <nav class="topnav" aria-label="Navigation principale">
+        <a href="{{ url_for('index') }}">Recherche</a>
+        <span>Jumia + IA</span>
+      </nav>
+    </header>
+
+    <main class="page">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <section class="alerts">
+            {% for message in messages %}
+              <p>{{ message }}</p>
+            {% endfor %}
+          </section>
+        {% endif %}
+      {% endwith %}
+
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>
