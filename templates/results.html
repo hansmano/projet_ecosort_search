@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Resultats - EcoSort-Search{% endblock %}
+
+{% block content %}
+<section class="section-heading">
+  <p class="eyebrow">{% if is_demo %}Mode démo{% else %}Résultats Jumia{% endif %}</p>
+  <h1>Sélectionnez l'article qui ressemble le plus à votre produit.</h1>
+  <p class="lead">
+    Recherche analysée : <strong>{{ query }}</strong>.
+    {% if is_demo %}
+      Ces produits préremplis permettent de présenter le parcours même sans connexion à Jumia.
+    {% else %}
+      Chaque carte peut être envoyée au modèle de tri.
+    {% endif %}
+  </p>
+</section>
+
+{% if fallback_available %}
+  <section class="fallback-panel">
+    <h2>Jumia est momentanément indisponible</h2>
+    <p>Le parcours peut tout de même être testé avec des produits de démonstration.</p>
+    <a class="button-link" href="{{ url_for('demo') }}"><svg class="icon"><use href="#icon-play"></use></svg>Ouvrir le mode démo</a>
+  </section>
+{% endif %}
+
+{% if products %}
+  <section class="product-grid">
+    {% for product in products %}
+      <article class="product-card">
+        <div class="product-image">
+          {% if product.image %}
+            <img src="{{ product.image }}" alt="{{ product.title }}">
+          {% else %}
+            <span>Image indisponible</span>
+          {% endif %}
+        </div>
+        <div class="product-body">
+          <h2>{{ product.title }}</h2>
+          {% if product.price %}
+            <p class="price">{{ product.price }}</p>
+          {% endif %}
+          {% if product.url %}
+            <a class="product-link" href="{{ product.url }}" target="_blank" rel="noreferrer">Consulter la fiche</a>
+          {% endif %}
+          <form action="{{ url_for('predict_product') }}" method="post">
+            <input type="hidden" name="title" value="{{ product.title }}">
+            <input type="hidden" name="price" value="{{ product.price }}">
+            <input type="hidden" name="image" value="{{ product.image }}">
+            <input type="hidden" name="url" value="{{ product.url }}">
+            {% if product.demo_bin %}
+              <input type="hidden" name="demo_bin" value="{{ product.demo_bin }}">
+              <input type="hidden" name="demo_material" value="{{ product.demo_material }}">
+              <input type="hidden" name="demo_reason" value="{{ product.demo_reason }}">
+            {% endif %}
+            <button type="submit"><svg class="icon"><use href="#icon-check"></use></svg>Classer ce produit</button>
+          </form>
+        </div>
+      </article>
+    {% endfor %}
+  </section>
+{% elif not fallback_available %}
+  <section class="empty-state">
+    <h2>Aucun résultat exploitable</h2>
+    <p>Essayez une recherche plus simple, par exemple “bouteille”, “chargeur” ou “cahier”.</p>
+    <a class="button-link secondary" href="{{ url_for('demo') }}"><svg class="icon"><use href="#icon-play"></use></svg>Tester avec le mode démo</a>
+  </section>
+{% endif %}
+
+<div class="action-row">
+  <a class="button-link" href="{{ url_for('index') }}"><svg class="icon"><use href="#icon-refresh"></use></svg>Nouvelle recherche</a>
+  <a class="button-link secondary" href="{{ url_for('about') }}"><svg class="icon"><use href="#icon-info"></use></svg>À propos des bacs</a>
+</div>
+{% endblock %}
