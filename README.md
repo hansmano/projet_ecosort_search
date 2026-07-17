@@ -1,101 +1,213 @@
-# ♻️ EcoSort-Search
+# EcoSort Search
 
-Application web d'aide au tri sélectif. L'utilisateur saisit le nom d'un produit,
-l'app interroge **Jumia** en direct, puis une IA (Deep Learning) analyse le produit
-choisi et affiche la **consigne de tri** en colorant l'écran aux couleurs de la
-poubelle correspondante.
+Application web Flask d'aide au tri selectif.
 
-## 🗂️ Les 5 poubelles
+L'utilisateur recherche un produit, choisit un resultat Jumia, puis l'application affiche la consigne de tri adaptee avec la couleur de la poubelle correspondante.
 
-| Poubelle | Couleur | Matières / Produits |
-| :-- | :-- | :-- |
-| **JAUNE** | 🟡 | Emballages légers : `plastic`, `metal`, `cardboard` |
-| **VERTE** | 🟢 | Verre d'emballage : `glass` |
-| **BLEUE** | 🔵 | Papiers graphiques : `paper` |
-| **D3E (Gris)** | ⚫ | Électronique / batterie (détecté par mots-clés du titre) |
-| **MARRON** | 🟤 | Déchets résiduels : `trash` |
+## Fonctionnalites
 
-## 🚀 Lancement (Docker)
+- Recherche de produits via Jumia.
+- Selection d'un produit a analyser.
+- Prediction de la categorie de tri.
+- Interface Flask responsive.
+- Hero anime avec plusieurs images de fond.
+- Page A propos expliquant les 5 categories.
+- Mode demo avec produits pre-remplis.
+- Historique recent stocke dans la session du navigateur.
+- Lancement via Docker ou Docker Compose.
+
+## Repartition de l'equipe
+
+- Mano : `feature/jalon1-model-ia`
+  - Dataset Kaggle.
+  - Entrainement du modele IA.
+  - Sauvegarde du modele `models/modele_eco_sort.h5`.
+
+- JOREXE : `feature/jalon2-scraping`
+  - Scraping Jumia.
+  - Extraction des produits : titre, prix, image, lien.
+
+- DROH : `feature/webapp-docker`
+  - Interface Flask.
+  - Templates HTML/CSS.
+  - Mode demo.
+  - Dockerfile et Docker Compose.
+
+## Modele IA
+
+- Architecture actuelle : Transfer Learning avec MobileNetV2.
+- Base ImageNet gelee, puis tete de classification adaptee au tri.
+- Dataset : Garbage Classification / TrashNet.
+- Classes apprises : `cardboard`, `glass`, `metal`, `paper`, `plastic`, `trash`.
+- Fichiers attendus :
+  - `models/modele_eco_sort.h5`
+  - `models/labels.json`
+
+### Reentrainer le modele
+
+Placer le dataset dans :
+
+```text
+data/dataset/<classe>/*.jpg
+```
+
+Puis lancer :
+
+```bash
+pip install -r requirements.txt
+python src/train.py --data_dir data/dataset --epochs 12
+```
+
+Le dossier `data/` ne doit pas etre pousse sur GitHub.
+
+## Scraping Jumia
+
+Le module `src/scraper.py` interroge Jumia avec `requests` et `BeautifulSoup`.
+
+Il renvoie une liste de produits contenant :
+
+- `title`
+- `price`
+- `image`
+- `url`
+
+L'interface Flask utilise ces donnees pour afficher les cartes produits.
+
+## Structure utile
+
+```text
+src/
+  app.py          # Application Flask
+  scraper.py      # Recherche Jumia
+  predict.py      # Prediction IA
+  config.py       # Categories, couleurs et mapping
+
+templates/
+  base.html
+  index.html
+  results.html
+  prediction.html
+  about.html
+
+static/
+  css/style.css
+  images/
+    ecosort-hero.png
+    ecosort-hero-ai.png
+    ecosort-hero-civic.png
+
+models/
+  modele_eco_sort.h5
+  labels.json
+```
+
+## Voir les images chez les autres membres
+
+Les images de l'interface sont dans :
+
+```text
+static/images/
+```
+
+Elles sont versionnees avec Git. Les autres membres les recuperent automatiquement avec :
+
+```bash
+git pull
+```
+
+ou, s'ils veulent tester directement ta branche :
+
+```bash
+git fetch origin
+git checkout feature/webapp-docker
+git pull origin feature/webapp-docker
+```
+
+Dans Docker, elles sont copiees grace a cette ligne du `Dockerfile` :
+
+```dockerfile
+COPY static/ ./static/
+```
+
+Il faut reconstruire l'image Docker apres une modification d'image ou de CSS.
+
+## Lancer avec Docker
+
+Depuis la racine du projet :
 
 ```bash
 docker build -t ecosort .
 docker run -p 8501:8501 ecosort
 ```
 
-ou :
+Puis ouvrir :
+
+```text
+http://localhost:8501
+```
+
+## Lancer avec Docker Compose
 
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
-Puis ouvrir **http://localhost:8501**.
+Puis ouvrir :
 
-## 🧠 Modèle (Jalon 1)
-
-- **Architecture :** Transfer Learning **MobileNetV2** (base ImageNet gelée) +
-  tête de classification, sur le dataset **Garbage Classification / TrashNet**
-  (6 classes : `cardboard, glass, metal, paper, plastic, trash`).
-- **Livrable :** `models/modele_eco_sort.h5` (+ `models/labels.json` = ordre des classes).
-- **Résultat actuel :** ~83-87% d'accuracy en validation après 12 epochs (base
-  MobileNetV2 gelée, entraînement CPU sur le dataset Kaggle
-  `asdasdasasdas/garbage-classification`, ~2500 images / 6 classes).
-
-### Réentraîner le modèle
-
-1. Télécharger le dataset Kaggle et le placer dans `data/dataset/<classe>/*.jpg` :
-
-   ```bash
-   pip install kaggle
-   # placer kaggle.json (API token, kaggle.com/settings) dans ~/.kaggle/
-   kaggle datasets download -d asdasdasasdas/garbage-classification -p data --unzip
-   # le zip s'extrait en "data/Garbage classification/Garbage classification/<classe>/"
-   # -> déplacer/renommer en data/dataset/<classe>/
-   ```
-
-2. Lancer l'entraînement :
-
-   ```bash
-   pip install -r requirements.txt
-   python src/train.py --data_dir data/dataset --epochs 12
-   ```
-
-## 🕸️ Scraping Jumia (Jalon 2)
-
-`src/scraper.py` interroge le moteur de recherche Jumia (`requests` +
-`BeautifulSoup`) et renvoie 3 à 5 produits (titre, prix, image, URL).
-Domaine configurable via `BASE_URL` (Côte d'Ivoire par défaut).
-
-## 📁 Structure
-
-```
-projet_ml/
-├── Dockerfile
-├── docker-compose.yml
-├── requirements.txt
-├── .gitignore
-├── README.md
-├── models/
-│   ├── modele_eco_sort.h5     # modèle entraîné (livrable)
-│   └── labels.json            # ordre des classes
-└── src/
-    ├── config.py              # classes, mapping poubelles, couleurs, mots-clés D3E
-    ├── train.py               # Jalon 1 : entraînement MobileNetV2
-    ├── scraper.py             # Jalon 2 : scraping Jumia
-    ├── predict.py             # inférence image + règle D3E
-    └── app.py                 # interface Streamlit
+```text
+http://localhost:8501
 ```
 
-## 🌱 Lancement en local (sans Docker)
+Pour arreter :
 
 ```bash
+docker compose down
+```
+
+## Lancer en local sans Docker
+
+Recommande seulement avec Python 3.10.
+
+```bash
+python -m venv .venv
+.\.venv\Scripts\activate
 pip install -r requirements.txt
-streamlit run src/app.py
+python src/app.py
 ```
 
-## 👥 Git — organisation d'équipe
+Puis ouvrir :
 
-- 3 branches (`feature/jalon1-model-ia`, `feature/jalon2-scraping`,
-  `feature/webapp-docker`), **zéro push direct sur `main`**, merges via Pull
-  Request relue et approuvée par au moins un autre membre.
-- Le dataset (`data/`) et les environnements virtuels ne sont **jamais** poussés
-  (voir `.gitignore`). Le modèle `.h5` est versionné (livrable).
+```text
+http://127.0.0.1:8501
+```
+
+## Mode demo
+
+Le mode demo permet de presenter l'application meme si Jumia ne repond pas.
+
+URL :
+
+```text
+http://localhost:8501/demo
+```
+
+Il utilise des produits pre-remplis et ne depend pas du scraping.
+
+## Bonnes pratiques Git
+
+Chaque membre travaille sur sa branche :
+
+```bash
+git checkout feature/webapp-docker
+```
+
+Cycle recommande :
+
+```bash
+git status
+git add <fichiers>
+git commit -m "Message clair"
+git push origin feature/webapp-docker
+```
+
+Ensuite ouvrir une Pull Request vers `main`.

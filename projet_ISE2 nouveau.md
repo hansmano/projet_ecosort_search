@@ -59,3 +59,88 @@ Pour être capable de comprendre la matière d'un emballage, le modèle a besoin
    - Des points de bonus seront accordés aux groupes ayant envoyés leur travail avant la date butoir à raison d'un point (0.5) par jour avec un un nombre de point maximum capé à 5.
    - Si un etudiant a au total plus de 20, les points additionnel seront rajoutés à sa note de participation.
    - 2 points par jour de penalité seront appliqués aux groupes qui rendront leurs travail après la date butoir.
+
+---
+
+## Notes d'equipe - Execution et interface
+
+### Branches de travail
+
+- `feature/jalon1-model-ia` : dataset et entrainement du modele IA.
+- `feature/jalon2-scraping` : scraper Jumia.
+- `feature/webapp-docker` : interface Flask, mode demo, page A propos et Docker.
+
+### Interface Flask
+
+La partie web est implementee avec Flask. Elle contient :
+
+- une page de recherche produit ;
+- une page de resultats ;
+- une page de prediction ;
+- une page A propos expliquant les 5 categories de tri ;
+- un mode demo avec produits pre-remplis ;
+- un historique recent stocke uniquement dans la session du navigateur ;
+- plusieurs images d'arriere-plan dans `static/images/`.
+
+### Images de l'interface
+
+Les images utilisees par l'interface sont stockees dans :
+
+```text
+static/images/
+```
+
+Elles sont incluses dans le depot Git. Les autres membres les verront apres :
+
+```bash
+git pull
+```
+
+ou apres recuperation de la branche :
+
+```bash
+git fetch origin
+git checkout feature/webapp-docker
+git pull origin feature/webapp-docker
+```
+
+Dans Docker, elles sont copiees avec :
+
+```dockerfile
+COPY static/ ./static/
+```
+
+Il faut donc reconstruire l'image Docker apres une modification du CSS ou des images.
+
+### Execution avec Docker
+
+Depuis la racine du projet :
+
+```bash
+docker build -t ecosort .
+docker run -p 8501:8501 ecosort
+```
+
+Puis ouvrir :
+
+```text
+http://localhost:8501
+```
+
+### Execution avec Docker Compose
+
+```bash
+docker compose up -d --build
+```
+
+Puis ouvrir :
+
+```text
+http://localhost:8501
+```
+
+Pour arreter :
+
+```bash
+docker compose down
+```

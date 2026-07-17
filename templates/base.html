@@ -7,6 +7,34 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   </head>
   <body class="{% block body_class %}{% endblock %}">
+    <svg class="icon-sprite" aria-hidden="true" focusable="false">
+      <symbol id="icon-search" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="7"></circle>
+        <path d="m16.5 16.5 4 4"></path>
+      </symbol>
+      <symbol id="icon-info" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9"></circle>
+        <path d="M12 10v6"></path>
+        <path d="M12 7h.01"></path>
+      </symbol>
+      <symbol id="icon-play" viewBox="0 0 24 24">
+        <path d="M8 5v14l11-7z"></path>
+      </symbol>
+      <symbol id="icon-refresh" viewBox="0 0 24 24">
+        <path d="M20 12a8 8 0 0 1-13.7 5.7"></path>
+        <path d="M4 12A8 8 0 0 1 17.7 6.3"></path>
+        <path d="M7 18H4v3"></path>
+        <path d="M17 6h3V3"></path>
+      </symbol>
+      <symbol id="icon-box" viewBox="0 0 24 24">
+        <path d="m3 7 9-4 9 4-9 4z"></path>
+        <path d="M3 7v10l9 4 9-4V7"></path>
+        <path d="M12 11v10"></path>
+      </symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24">
+        <path d="M20 6 9 17l-5-5"></path>
+      </symbol>
+    </svg>
     <header class="topbar">
       <a class="brand" href="{{ url_for('index') }}">
         <span class="brand-mark" aria-hidden="true"></span>
@@ -16,7 +44,9 @@
         </span>
       </a>
       <nav class="topnav" aria-label="Navigation principale">
-        <a href="{{ url_for('index') }}">Recherche</a>
+        <a href="{{ url_for('index') }}"><svg class="icon"><use href="#icon-search"></use></svg>Recherche</a>
+        <a href="{{ url_for('about') }}"><svg class="icon"><use href="#icon-info"></use></svg>À propos</a>
+        <a href="{{ url_for('demo') }}"><svg class="icon"><use href="#icon-play"></use></svg>Mode démo</a>
         <span>Jumia + IA</span>
       </nav>
     </header>
