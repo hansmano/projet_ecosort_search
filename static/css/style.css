@@ -1,5 +1,5 @@
 :root {
-  --bg: #eef4ee;
+  --bg: #edf3ef;
   --bg-soft: #f8faf7;
   --surface: #ffffff;
   --surface-strong: #0f2f24;
@@ -12,7 +12,7 @@
   --blue: #2465c4;
   --gray: #6b7280;
   --brown: #5b3a1e;
-  --shadow: 0 22px 60px rgba(18, 42, 31, 0.14);
+  --shadow: 0 24px 70px rgba(18, 42, 31, 0.16);
 }
 
 * {
@@ -24,7 +24,7 @@ body {
   min-height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
   background:
-    radial-gradient(circle at top left, rgba(244, 194, 13, 0.18), transparent 28rem),
+    radial-gradient(circle at top left, rgba(244, 194, 13, 0.14), transparent 28rem),
     linear-gradient(180deg, #f4f8f3 0%, var(--bg) 100%);
   color: var(--text);
 }
@@ -41,7 +41,7 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 0.9rem clamp(1rem, 4vw, 3rem);
+  padding: 0.8rem clamp(1rem, 4vw, 3rem);
   border-bottom: 1px solid rgba(31, 65, 48, 0.12);
   background: rgba(248, 250, 247, 0.88);
   backdrop-filter: blur(14px);
@@ -97,9 +97,9 @@ a {
 }
 
 .page {
-  width: min(1180px, calc(100% - 2rem));
+  width: min(1220px, calc(100% - 2rem));
   margin: 0 auto;
-  padding: 2rem 0 4rem;
+  padding: 1.25rem 0 4rem;
 }
 
 .alerts {
@@ -116,12 +116,17 @@ a {
 }
 
 .hero {
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(320px, 1.08fr);
-  gap: clamp(1.25rem, 4vw, 3rem);
   align-items: center;
-  min-height: calc(100vh - 7.5rem);
-  padding: 1rem 0 2rem;
+  min-height: min(720px, calc(100vh - 5.8rem));
+  padding: clamp(2rem, 6vw, 5rem);
+  overflow: hidden;
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, rgba(248, 250, 247, 0.96) 0%, rgba(248, 250, 247, 0.88) 34%, rgba(248, 250, 247, 0.28) 58%, rgba(248, 250, 247, 0.02) 100%),
+    url("../images/ecosort-hero.png") center / cover no-repeat;
+  box-shadow: var(--shadow);
 }
 
 .hero-content,
@@ -132,6 +137,7 @@ a {
 .hero-content {
   position: relative;
   z-index: 1;
+  max-width: 620px;
 }
 
 .eyebrow {
@@ -152,12 +158,12 @@ span {
 
 h1 {
   margin: 0;
-  font-size: clamp(2.25rem, 5vw, 4.85rem);
+  font-size: clamp(2.35rem, 5vw, 5rem);
   line-height: 1.02;
 }
 
 .lead {
-  max-width: 700px;
+  max-width: 590px;
   margin: 1.05rem 0 0;
   color: var(--muted);
   font-size: 1.08rem;
@@ -166,11 +172,11 @@ h1 {
 
 .search-form {
   margin-top: 2rem;
-  padding: 0.85rem;
+  padding: 0.78rem;
   border: 1px solid rgba(31, 122, 77, 0.16);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.82);
-  box-shadow: var(--shadow);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 18px 50px rgba(18, 42, 31, 0.13);
 }
 
 .search-form label {
@@ -208,10 +214,13 @@ button {
   font-weight: 900;
   cursor: pointer;
   box-shadow: 0 14px 26px rgba(31, 122, 77, 0.24);
+  transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
 }
 
 button:hover {
   background: var(--green-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 18px 34px rgba(31, 122, 77, 0.28);
 }
 
 .hero-tags,
@@ -229,10 +238,11 @@ button:hover {
   padding: 0.45rem 0.7rem;
   border-radius: 999px;
   border: 1px solid rgba(23, 36, 31, 0.12);
-  background: white;
+  background: rgba(255, 255, 255, 0.88);
   color: var(--text);
   font-size: 0.86rem;
   font-weight: 900;
+  backdrop-filter: blur(10px);
 }
 
 .tag.yellow,
@@ -265,33 +275,8 @@ button:hover {
   box-shadow: inset 0 4px 0 var(--brown);
 }
 
-.hero-visual {
-  position: relative;
-  min-height: 560px;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  background: var(--surface-strong);
-}
-
-.hero-visual::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(15, 47, 36, 0.62), transparent 48%);
-  pointer-events: none;
-}
-
-.hero-visual img {
-  width: 100%;
-  height: 100%;
-  min-height: 560px;
-  object-fit: cover;
-  display: block;
-}
-
 .bin-strip {
-  margin: -0.4rem 0 2rem;
+  margin: 1rem 0 2rem;
 }
 
 .bin-card {
@@ -300,7 +285,13 @@ button:hover {
   padding: 1rem;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.86);
+  background: rgba(255, 255, 255, 0.9);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.bin-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(18, 42, 31, 0.11);
 }
 
 .bin-card strong {
@@ -328,7 +319,7 @@ button:hover {
 .verdict-card {
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.92);
   box-shadow: 0 12px 34px rgba(18, 42, 31, 0.08);
 }
 
@@ -386,7 +377,7 @@ button:hover {
 }
 
 .product-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   box-shadow: 0 18px 44px rgba(18, 42, 31, 0.14);
 }
 
@@ -550,22 +541,15 @@ dd {
 }
 
 @media (max-width: 900px) {
-  .hero,
   .prediction-layout {
     grid-template-columns: 1fr;
   }
 
   .hero {
     min-height: auto;
-  }
-
-  .hero-visual,
-  .hero-visual img {
-    min-height: 340px;
-  }
-
-  .hero-visual::after {
-    background: linear-gradient(180deg, rgba(15, 47, 36, 0.35), transparent 48%);
+    background:
+      linear-gradient(180deg, rgba(248, 250, 247, 0.98) 0%, rgba(248, 250, 247, 0.9) 58%, rgba(248, 250, 247, 0.28) 100%),
+      url("../images/ecosort-hero.png") center / cover no-repeat;
   }
 
   .workflow {
@@ -589,8 +573,12 @@ dd {
   }
 
   .page {
-    width: min(100% - 1rem, 1180px);
+    width: min(100% - 1rem, 1220px);
     padding-top: 1rem;
+  }
+
+  .hero {
+    padding: 1.25rem;
   }
 
   .search-form {
