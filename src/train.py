@@ -61,13 +61,16 @@ def build_datasets(data_dir, img_size, batch_size, seed=123):
 def build_model(num_classes, img_size):
     base = MobileNetV2(input_shape=img_size + (3,), include_top=False,
                        weights="imagenet")
-    base.trainable = False  # base gelée : entraînement rapide
+    base.trainable = False  # base gelée pour la 1ere phase d'entrainement (tete seule)
 
     inputs = layers.Input(shape=img_size + (3,))
     # Normalisation MobileNetV2 (equivalent a preprocess_input, mode "tf") :
     # couche native Rescaling au lieu d'un Lambda, pour eviter d'embarquer du
     # bytecode Python (marshal) lie a une version precise de Python dans le .h5.
     x = layers.Rescaling(scale=1.0 / 127.5, offset=-1.0)(inputs)
+    # training=False force les couches BatchNorm du base model a rester en
+    # mode inference meme apres degel (fine-tuning), ce qui evite de casser
+    # leurs statistiques sur un petit dataset.
     x = base(x, training=False)
     x = layers.GlobalAveragePooling2D()(x)
     x = layers.Dropout(0.3)(x)
@@ -76,7 +79,7 @@ def build_model(num_classes, img_size):
     model = models.Model(inputs, outputs)
     model.compile(optimizer=tf.keras.optimizers.Adam(1e-3),
                   loss="categorical_crossentropy", metrics=["accuracy"])
-    return model
+    return model, base
 
 
 def main():
@@ -85,13 +88,19 @@ def main():
     p.add_argument("--epochs", type=int, default=12)
     p.add_argument("--batch_size", type=int, default=16)
     p.add_argument("--out", default=config.MODEL_PATH)
+    p.add_argument("--fine_tune_epochs", type=int, default=8,
+                    help="Epochs supplementaires avec le haut de MobileNetV2 degele (0 = desactive)")
+    p.add_argument("--fine_tune_at", type=int, default=100,
+                    help="Index de couche MobileNetV2 a partir duquel degeler (couches avant = gelees)")
+    p.add_argument("--fine_tune_lr", type=float, default=1e-5,
+                    help="Learning rate de la phase de fine-tuning (doit rester tres faible)")
     args = p.parse_args()
 
     tf.random.set_seed(123)
     train_ds, val_ds, class_names = build_datasets(
         args.data_dir, config.IMG_SIZE, args.batch_size)
 
-    model = build_model(len(class_names), config.IMG_SIZE)
+    model, base = build_model(len(class_names), config.IMG_SIZE)
     model.summary()
 
     ckpt = tf.keras.callbacks.ModelCheckpoint(
@@ -99,8 +108,27 @@ def main():
     early = tf.keras.callbacks.EarlyStopping(
         monitor="val_accuracy", patience=4, restore_best_weights=True)
 
-    model.fit(train_ds, validation_data=val_ds, epochs=args.epochs,
-              callbacks=[ckpt, early])
+    history = model.fit(train_ds, validation_data=val_ds, epochs=args.epochs,
+                         callbacks=[ckpt, early])
+
+    if args.fine_tune_epochs > 0:
+        print(f"\n--- Fine-tuning : degel de MobileNetV2 a partir de la couche {args.fine_tune_at} "
+              f"(lr={args.fine_tune_lr}) ---")
+        base.trainable = True
+        for layer in base.layers[:args.fine_tune_at]:
+            layer.trainable = False
+
+        # Recompilation obligatoire apres changement de trainable, avec un lr
+        # tres faible pour ne pas detruire les features ImageNet pre-entrainees.
+        model.compile(optimizer=tf.keras.optimizers.Adam(args.fine_tune_lr),
+                      loss="categorical_crossentropy", metrics=["accuracy"])
+        model.summary()
+
+        last_epoch = history.epoch[-1] + 1 if history.epoch else 0
+        model.fit(train_ds, validation_data=val_ds,
+                  epochs=last_epoch + args.fine_tune_epochs,
+                  initial_epoch=last_epoch,
+                  callbacks=[ckpt, early])
 
     os.makedirs(os.path.dirname(args.out), exist_ok=True)
     model.save(args.out)
