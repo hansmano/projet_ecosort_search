@@ -52,11 +52,14 @@ définis dans [`src/config.py`](src/config.py).
 
 ```text
 src/
-  app.py          # Application Flask (routes, session, historique)
-  scraper.py      # Recherche Jumia (requests + BeautifulSoup)
-  predict.py      # Prédiction IA + règle D3E
-  config.py       # Classes, poubelles, couleurs, mots-clés D3E
-  train.py        # Entraînement MobileNetV2 (Jalon 1)
+  app.py             # Application Flask (routes, session, historique)
+  scraper.py         # Adaptateur : Produit -> dict {title, price, image, url} pour app.py
+  jumia_scraper.py   # Scraping Jumia (requests + BeautifulSoup, retry, fallback)
+  jumia_fallback.json  # Résultats de secours si le scraping en direct échoue
+  test_scraper.py    # Tests unitaires (parsing + fallback)
+  predict.py         # Prédiction IA + règle D3E
+  config.py          # Classes, poubelles, couleurs, mots-clés D3E
+  train.py           # Entraînement + fine-tuning MobileNetV2 (Jalon 1)
 
 templates/
   base.html
@@ -158,8 +161,11 @@ URL : <http://localhost:8501/demo>
 - **Dataset :** Garbage Classification / TrashNet (Kaggle
   `asdasdasasdas/garbage-classification`, ~2500 images / 6 classes).
 - **Classes apprises :** `cardboard`, `glass`, `metal`, `paper`, `plastic`, `trash`.
-- **Résultat actuel :** ~83-87 % d'accuracy en validation après 12 epochs
-  (entraînement CPU).
+- **Fine-tuning :** après la phase base gelée, dégel des couches hautes de
+  MobileNetV2 (à partir d'un index configurable) avec un learning rate très
+  faible, pour affiner les features sur le dataset de déchets.
+- **Résultat actuel :** ~88 % d'accuracy en validation (contre ~85 % avec la
+  base gelée seule) après 12 epochs tête seule + 8 epochs de fine-tuning.
 - **Fichiers attendus :**
   - `models/modele_eco_sort.h5`
   - `models/labels.json`
@@ -180,28 +186,40 @@ URL : <http://localhost:8501/demo>
 
    ```bash
    pip install -r requirements.txt
-   python src/train.py --data_dir data/dataset --epochs 12
+   python src/train.py --data_dir data/dataset --epochs 12 --fine_tune_epochs 8
    ```
+
+   Options de fine-tuning : `--fine_tune_epochs` (0 pour désactiver),
+   `--fine_tune_at` (index de couche MobileNetV2 à partir duquel dégeler,
+   défaut 100), `--fine_tune_lr` (défaut `1e-5`, doit rester très faible).
 
 Le dossier `data/` ne doit **jamais** être poussé sur GitHub (voir `.gitignore`).
 
 ## Scraping Jumia (Jalon 2)
 
-Le module [`src/scraper.py`](src/scraper.py) interroge le moteur de
-recherche Jumia (`requests` + `BeautifulSoup`) et renvoie jusqu'à 5 produits
-contenant :
+Le scraping est séparé en deux modules :
 
-- `title`
-- `price`
-- `image`
-- `url`
+- [`src/jumia_scraper.py`](src/jumia_scraper.py) : implémentation réelle
+  (`requests` + `BeautifulSoup`). Fonction publique `scrape_jumia(keyword,
+  max_results)`, renvoie une liste d'objets `Produit` (`nom`, `prix`,
+  `prix_barre`, `image_url`, `lien`, `note`). Inclut :
+  - **Retry automatique** (3 tentatives, backoff) en cas d'erreur réseau.
+  - **Fallback local** ([`src/jumia_fallback.json`](src/jumia_fallback.json)) :
+    si le scraping en direct échoue, bascule sur des résultats pré-enregistrés
+    pour ne jamais bloquer une démo. Alimentable via
+    `python src/jumia_scraper.py "mot-clé" --save-fallback`.
+- [`src/scraper.py`](src/scraper.py) : adaptateur utilisé par `app.py`, qui
+  convertit les `Produit` en dicts `{title, price, image, url}` (format
+  attendu par les templates) et expose `download_image()`.
 
-L'interface Flask utilise ces données pour afficher les cartes produits.
+Tests unitaires : [`src/test_scraper.py`](src/test_scraper.py) (parsing des
+cartes produit + logique de fallback).
 
 ## Configuration
 
-- `BASE_URL` (dans `src/scraper.py`) : domaine Jumia interrogé, `https://www.jumia.ci`
-  par défaut (Côte d'Ivoire) — à adapter selon le pays cible.
+- `BASE_URL` (dans `src/jumia_scraper.py`) : domaine Jumia interrogé,
+  `https://www.jumia.ci` par défaut (Côte d'Ivoire) — à adapter selon le pays
+  cible.
 - `D3E_KEYWORDS` (dans `src/config.py`) : liste de mots-clés utilisés pour
   forcer la poubelle D3E quand le titre du produit correspond à un appareil
   électronique (le dataset Kaggle ne contient pas de classe électronique).
