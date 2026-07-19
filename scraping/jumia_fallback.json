@@ -1,0 +1,187 @@
+{
+  "_comment": "Filet de sécurité local utilisé automatiquement par scrape_jumia() si le scraping en direct échoue. Les entrées ci-dessous ont des noms/prix/liens réels (relevés manuellement sur jumia.ci) mais PAS d'image_url vérifiée : lance `python jumia_scraper.py \"<mot-clé>\" --save-fallback` avec une bonne connexion avant la démo pour les compléter avec de vraies images.",
+  "telephone": [
+    {
+      "nom": "Xiaomi Redmi A7 - 6.88\" - 2SIM - 4G - 8/13 Mpx - 3/64 Go - Noir - Garantie 12 Mois",
+      "prix": "52,650 FCFA",
+      "prix_barre": "60,000 FCFA",
+      "image_url": "https://ci.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/31/482323/1.jpg?0909",
+      "lien": "https://www.jumia.ci/xiaomi-redmi-a7-6.88-2sim-4g-813-mpx-364-go-noir-garantie-12-mois-32328413.html",
+      "note": "4.3 out of 5(61)"
+    },
+    {
+      "nom": "Samsung Galaxy A07 - 6,7\" - 4G - 2 SIM - 64GO ROM - 4GO RAM - 50 MP - 5000MAH - Noir - 12 Mois de garantie",
+      "prix": "60,000 FCFA",
+      "prix_barre": "65,000 FCFA",
+      "image_url": "https://ci.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/21/377813/1.jpg?0181",
+      "lien": "https://www.jumia.ci/samsung-galaxy-a07-67-4g-2-sim-64go-rom-4go-ram-50-mp-5000mah-noir-12-mois-de-garantie-31877312.html",
+      "note": "3.9 out of 5(778)"
+    },
+    {
+      "nom": "Xiaomi Redmi A7 - 6.88\" - 2SIM - 4G - 8/13 Mpx - 3/64 Go - Noir - Garantie 12 Mois",
+      "prix": "51,900 FCFA",
+      "prix_barre": "60,000 FCFA",
+      "image_url": "https://ci.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/83/464223/1.jpg?6368",
+      "lien": "https://www.jumia.ci/xiaomi-redmi-a7-6.88-2sim-4g-813-mpx-364-go-noir-garantie-12-mois-32246438.html",
+      "note": "3.2 out of 5(18)"
+    },
+    {
+      "nom": "Xiaomi Redmi A7 - 6.88\" - 2SIM - 4G - 8/13 Mpx - 3/64 Go - Bleu - Garantie 12 Mois",
+      "prix": "53,200 FCFA",
+      "prix_barre": "60,000 FCFA",
+      "image_url": "https://ci.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/34/464223/1.jpg?9996",
+      "lien": "https://www.jumia.ci/xiaomi-redmi-a7-6.88-2sim-4g-813-mpx-364-go-bleu-garantie-12-mois-32246443.html",
+      "note": "3.6 out of 5(34)"
+    },
+    {
+      "nom": "Xiaomi Redmi Note 15 - 6.77\" AMOLED - 2SIM - 4G - 108Mpx - 8/256 Go - Noir - Garantie 12 Mois",
+      "prix": "118,950 FCFA",
+      "prix_barre": "130,000 FCFA",
+      "image_url": "https://ci.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/35/425123/1.jpg?2204",
+      "lien": "https://www.jumia.ci/xiaomi-redmi-note-15-6.77-amoled-2sim-4g-108mpx-8256-go-noir-garantie-12-mois-32152453.html",
+      "note": "4 out of 5(8)"
+    }
+  ],
+  "ecouteur": [
+    {
+      "nom": "JNKACLD P9 - Casque Bluetooth Sans Fil - Noir",
+      "prix": "1,988 FCFA",
+      "prix_barre": "14,777 FCFA",
+      "image_url": null,
+      "lien": "https://www.jumia.ci/jnkacld-p9-casque-bluetooth-sans-fil-noir-27776705.html",
+      "note": "3.6 out of 5 (853)"
+    }
+  ],
+  "montre": [
+    {
+      "nom": "JNKACLD T800 Ultra - Montre Connectée Bluetooth - Gris",
+      "prix": "2,380 FCFA",
+      "prix_barre": "10,003 FCFA",
+      "image_url": null,
+      "lien": "https://www.jumia.ci/jnkacld-t800-ultra-montre-connectee-bluetooth-gris-27952426.html",
+      "note": "3.6 out of 5 (444)"
+    }
+  ],
+  "television": [
+    {
+      "nom": "Nasco TV LED Slim 32\" - Décodeur Intégré - HD - Régulateur de tension - HDMI - USB - VGA - Noir - Garantie 12 Mois",
+      "prix": "44,900 FCFA",
+      "prix_barre": "56,900 FCFA",
+      "image_url": null,
+      "lien": "https://www.jumia.ci/slim-tv-led-32-hd-decodeur-integre-regulateur-de-tension-hdmi-usb-vga-noir-garantie-12-mois-nasco-mpg669739.html",
+      "note": "3.6 out of 5 (16471)"
+    }
+  ],
+  "bouilloire": [
+    {
+      "nom": "Nasco Bouilloire électrique - 1500W - NASKT-1.8LIT - 1,8L - Gris",
+      "prix": "2,900 FCFA",
+      "prix_barre": "3,700 FCFA",
+      "image_url": null,
+      "lien": "https://www.jumia.ci/nasco-bouilloire-electrique-1500w-naskt-1.8lit-18l-gris-29467153.html",
+      "note": "3.7 out of 5 (3821)"
+    }
+  ],
+  "_default": [
+    {
+      "nom": "Nasco Bouilloire électrique - 1500W - NASKT-1.8LIT - 1,8L - Gris",
+      "prix": "2,900 FCFA",
+      "prix_barre": "3,700 FCFA",
+      "image_url": null,
+      "lien": "https://www.jumia.ci/nasco-bouilloire-electrique-1500w-naskt-1.8lit-18l-gris-29467153.html",
+      "note": "3.7 out of 5 (3821)"
+    },
+    {
+      "nom": "JNKACLD P9 - Casque Bluetooth Sans Fil - Noir",
+      "prix": "1,988 FCFA",
+      "prix_barre": "14,777 FCFA",
+      "image_url": null,
+      "lien": "https://www.jumia.ci/jnkacld-p9-casque-bluetooth-sans-fil-noir-27776705.html",
+      "note": "3.6 out of 5 (853)"
+    }
+  ],
+  "bouteille": [
+    {
+      "nom": "1000ml Thermos En Acier Inoxydable noir",
+      "prix": "3,600 FCFA",
+      "prix_barre": "10,830 FCFA",
+      "image_url": "https://ci.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/90/299992/1.jpg?3423",
+      "lien": "https://www.jumia.ci/generic-1000ml-thermos-en-acier-inoxydable-noir-29999209.html",
+      "note": "4 out of 5(50)"
+    },
+    {
+      "nom": "3 En 1 Bouteille D'eau Inspirante Avec Marqueur De Temps,2000 Ml/800 Ml/300 Ml",
+      "prix": "5,320 FCFA",
+      "prix_barre": "9,128 FCFA",
+      "image_url": "https://ci.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/87/588203/1.jpg?0096",
+      "lien": "https://www.jumia.ci/generic-3-en-1-bouteille-deau-inspirante-avec-marqueur-de-temps2000-ml800-ml300-ml-30288578.html",
+      "note": "4.3 out of 5(3)"
+    },
+    {
+      "nom": "Bouteille d'eau motivation de couleur 3 en 1 avec autocollants",
+      "prix": "5,200 FCFA",
+      "prix_barre": "8,119 FCFA",
+      "image_url": "https://ci.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/23/221962/1.jpg?3665",
+      "lien": "https://www.jumia.ci/generic-bouteille-deau-motivation-de-couleur-3-en-1-avec-autocollants-26912232.html",
+      "note": "3.4 out of 5(46)"
+    },
+    {
+      "nom": "Ensemble De 4 Pièces Pulvérisateurs Pour Salon De Coiffure, Peigne De Style Professionnel",
+      "prix": "4,900 FCFA",
+      "prix_barre": "7,000 FCFA",
+      "image_url": "https://ci.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/04/026713/1.jpg?4423",
+      "lien": "https://www.jumia.ci/generic-ensemble-de-4-pieces-pulverisateurs-pour-salon-de-coiffure-peigne-de-style-professionnel-31762040.html",
+      "note": "3.3 out of 5(7)"
+    },
+    {
+      "nom": "Bouillotte 2L EnCaoutchouc Avec Housse - Housse En Fourrure Douce Et Câline, Chauffe-Mains Pour Enfants Et Adultes, Soulagement De La Douleur (Gris)",
+      "prix": "4,550 FCFA",
+      "prix_barre": "9,100 FCFA",
+      "image_url": "https://ci.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/14/408913/1.jpg?7980",
+      "lien": "https://www.jumia.ci/generic-bouillotte-2l-encaoutchouc-avec-housse-housse-en-fourrure-douce-et-caline-chauffe-mains-pour-enfants-et-adultes-soulagement-de-la-douleur-gris-31980441.html",
+      "note": "3.8 out of 5(4)"
+    }
+  ],
+  "cahier": [
+    {
+      "nom": "Lot de 2 Carnet De Croquis A4 (60 pages), Bloc-notes, Livre D'images Dessinés à La Main,Carnet De Croquis, Livre De Dessin",
+      "prix": "4,355 FCFA",
+      "prix_barre": "7,800 FCFA",
+      "image_url": "https://ci.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/05/817903/1.jpg?0840",
+      "lien": "https://www.jumia.ci/generic-lot-de-2-carnet-de-croquis-a4-60-pages-bloc-notes-livre-dimages-dessines-a-la-maincarnet-de-croquis-livre-de-dessin-30971850.html",
+      "note": "4 out of 5(8)"
+    },
+    {
+      "nom": "2pcs A4 + 8K Carnet De Croquis, Cahier De Dessin Artistique Pour étudiants, Livre D'images",
+      "prix": "3,990 FCFA",
+      "prix_barre": "10,500 FCFA",
+      "image_url": "https://ci.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/35/381403/1.jpg?1614",
+      "lien": "https://www.jumia.ci/generic-2pcs-a4-8k-carnet-de-croquis-cahier-de-dessin-artistique-pour-etudiants-livre-dimages-30418353.html",
+      "note": "4.4 out of 5(9)"
+    },
+    {
+      "nom": "Bloc-notes Papier Kraft Inspirant, Mini Cahier à Spirale et Stylo à Bille",
+      "prix": "2,438 FCFA",
+      "prix_barre": "5,850 FCFA",
+      "image_url": "https://ci.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/63/903403/1.jpg?2119",
+      "lien": "https://www.jumia.ci/generic-bloc-notes-papier-kraft-inspirant-mini-cahier-a-spirale-et-stylo-a-bille-30430936.html",
+      "note": "4.3 out of 5(8)"
+    },
+    {
+      "nom": "16K Sketchbook épais, Livre D'images Dessinées à La Main, Livre De Dessin",
+      "prix": "4,200 FCFA",
+      "prix_barre": "6,244 FCFA",
+      "image_url": "https://ci.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/01/626103/1.jpg?3386",
+      "lien": "https://www.jumia.ci/generic-16k-sketchbook-epais-livre-dimages-dessinees-a-la-main-livre-de-dessin-30162610.html",
+      "note": "3.8 out of 5(20)"
+    },
+    {
+      "nom": "Un ensemble de 155 feuilles de papier à motifs paysagers, style aquarelle, recyclables, fournitures de bureau, matériel de cahier de bricolage, coffret cadeau avec autocollants",
+      "prix": "2,990 FCFA",
+      "prix_barre": "9,984 FCFA",
+      "image_url": "https://ci.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/23/701813/1.jpg?0862",
+      "lien": "https://www.jumia.ci/generic-un-ensemble-de-155-feuilles-de-papier-a-motifs-paysagers-style-aquarelle-recyclables-fournitures-de-bureau-materiel-de-cahier-de-bricolage-coffret-cadeau-avec-autocollants-31810732.html",
+      "note": "3 out of 5(3)"
+    }
+  ]
+}
